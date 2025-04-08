@@ -65,6 +65,7 @@ impl Cpu {
 }
 
 #[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CpuSnapshot {
     pub pc: u16,
     pub sp: u16,

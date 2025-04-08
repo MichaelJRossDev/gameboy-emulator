@@ -71,7 +71,13 @@ mod tests {
 
         cpu.step().unwrap();
 
+        let expected = CpuSnapshot {
+            pc: before.pc.wrapping_add(1),
+            ..before
+        };
+
         let after = CpuSnapshot::from(&cpu);
-        assert_eq!(after.pc, before.pc.wrapping_add(1));
+
+        assert_eq!(after, expected);
     }
 }
