@@ -2,7 +2,7 @@ use thiserror::Error;
 
 use crate::{
     instruction::{
-        Instruction, InstructionDecodeError, InstructionExecuteError, Opcode, OpcodeDecodeError,
+        Instruction, decode::InstructionDecodeError, execute::InstructionExecuteError, Opcode, OpcodeDecodeError,
     },
     memory::{FlatMemory, MemoryBus},
 };

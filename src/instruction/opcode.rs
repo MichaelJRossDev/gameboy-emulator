@@ -1,15 +1,8 @@
 use std::convert::TryFrom;
 use thiserror::Error;
 
-#[repr(u8)]
 pub enum Opcode {
-    Nop = 0x00,
-}
-
-#[derive(Debug, Error)]
-pub enum OpcodeDecodeError {
-    #[error("Invalid opcode: 0x{0:02X}")]
-    InvalidOpcode(u8),
+    Nop,
 }
 
 impl TryFrom<u8> for Opcode {
@@ -22,3 +15,10 @@ impl TryFrom<u8> for Opcode {
         }
     }
 }
+
+#[derive(Debug, Error)]
+pub enum OpcodeDecodeError {
+    #[error("Invalid opcode: 0x{0:02X}")]
+    InvalidOpcode(u8),
+}
+

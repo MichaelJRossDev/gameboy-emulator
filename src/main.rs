@@ -2,14 +2,11 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 #![allow(unused_imports)]
-
-use cpu::Cpu;
-use instruction::{Instruction, Opcode};
-use memory::FlatMemory;
+#![allow(unreachable_patterns)]
 
 mod instruction;
-mod memory;
 mod cpu;
+mod memory;
 
 fn main() {
 }
