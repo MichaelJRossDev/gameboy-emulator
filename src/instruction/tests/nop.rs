@@ -1,4 +1,4 @@
-use crate::cpu::{Cpu, CpuSnapshot};
+use crate::cpu::{Cpu, snapshot::CpuSnapshot};
 
 #[test]
 fn nop_only_advances_pc() {
