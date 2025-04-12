@@ -3,6 +3,7 @@ use thiserror::Error;
 
 pub enum Opcode {
     Nop,
+    LdBImm8,
 }
 
 impl TryFrom<u8> for Opcode {
@@ -11,6 +12,7 @@ impl TryFrom<u8> for Opcode {
     fn try_from(byte: u8) -> Result<Self, Self::Error> {
         match byte {
             0x00 => Ok(Opcode::Nop),
+            0x06 => Ok(Opcode::LdBImm8),
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }
     }

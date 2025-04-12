@@ -1,8 +1,14 @@
+#[macro_use]
+pub mod registers;
+
+#[cfg(test)]
+pub mod snapshot;
+
 use thiserror::Error;
 
 use crate::{
     instruction::{
-        Instruction, decode::InstructionDecodeError, execute::InstructionExecuteError, Opcode, OpcodeDecodeError,
+        Instruction, InstructionDecodeError, InstructionExecuteError, Opcode, OpcodeDecodeError,
     },
     memory::{FlatMemory, MemoryBus},
 };
@@ -65,21 +71,6 @@ impl Cpu {
 }
 
 #[cfg(test)]
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct CpuSnapshot {
-    pub pc: u16,
-    pub sp: u16,
-    pub a: u8,
-    pub f: u8,
-    pub b: u8,
-    pub c: u8,
-    pub d: u8,
-    pub e: u8,
-    pub h: u8,
-    pub l: u8,
-}
-
-#[cfg(test)]
 impl Cpu {
     pub fn cpu_with_program(program: &[u8]) -> Cpu {
         let mut memory = FlatMemory::new();
@@ -92,23 +83,5 @@ impl Cpu {
 
         cpu.pc = 0x0100;
         cpu
-    }
-}
-
-#[cfg(test)]
-impl From<&Cpu> for CpuSnapshot {
-    fn from(cpu: &Cpu) -> Self {
-        Self {
-            pc: cpu.pc,
-            sp: cpu.sp,
-            a: cpu.a,
-            f: cpu.f,
-            b: cpu.b,
-            c: cpu.c,
-            d: cpu.d,
-            e: cpu.e,
-            h: cpu.h,
-            l: cpu.l,
-        }
     }
 }

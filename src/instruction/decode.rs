@@ -9,6 +9,10 @@ impl Instruction {
                 opcode: Opcode::Nop,
                 operands: (Operand::None, Operand::None),
             }),
+            Opcode::LdBImm8 => Ok(Self {
+                opcode: Opcode::LdBImm8,
+                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
+            }),
             _ => Err(InstructionDecodeError::NotImplemented),
         }
     }
