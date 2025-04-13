@@ -9,34 +9,66 @@ impl Instruction {
                 opcode,
                 operands: (Operand::None, Operand::None),
             }),
-            Opcode::LdBImm8 => Ok(Self {
+
+            // Ld r8 Imm8
+            Opcode::LdBImm8
+            | Opcode::LdCImm8
+            | Opcode::LdDImm8
+            | Opcode::LdEImm8
+            | Opcode::LdHImm8
+            | Opcode::LdLImm8
+            | Opcode::LdAImm8 => Ok(Self {
                 opcode,
                 operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
             }),
-            Opcode::LdCImm8 => Ok(Self {
+
+            // Ld r8 r8
+            Opcode::LdBC
+            | Opcode::LdBD
+            | Opcode::LdBE
+            | Opcode::LdBH
+            | Opcode::LdBL
+            | Opcode::LdBA
+            | Opcode::LdCB
+            | Opcode::LdCD
+            | Opcode::LdCE
+            | Opcode::LdCH
+            | Opcode::LdCL
+            | Opcode::LdCA
+            | Opcode::LdDB
+            | Opcode::LdDC
+            | Opcode::LdDE
+            | Opcode::LdDH
+            | Opcode::LdDL
+            | Opcode::LdDA
+            | Opcode::LdEB
+            | Opcode::LdEC
+            | Opcode::LdED
+            | Opcode::LdEH
+            | Opcode::LdEL
+            | Opcode::LdEA
+            | Opcode::LdHB
+            | Opcode::LdHC
+            | Opcode::LdHD
+            | Opcode::LdHE
+            | Opcode::LdHL
+            | Opcode::LdHA
+            | Opcode::LdLB
+            | Opcode::LdLC
+            | Opcode::LdLD
+            | Opcode::LdLE
+            | Opcode::LdLH
+            | Opcode::LdLA
+            | Opcode::LdAB
+            | Opcode::LdAC
+            | Opcode::LdAD
+            | Opcode::LdAE
+            | Opcode::LdAH
+            | Opcode::LdAL => Ok(Self {
                 opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
+                operands: (Operand::None, Operand::None),
             }),
-            Opcode::LdDImm8 => Ok(Self {
-                opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
-            }),
-            Opcode::LdEImm8 => Ok(Self {
-                opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
-            }),
-            Opcode::LdHImm8 => Ok(Self {
-                opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
-            }),
-            Opcode::LdLImm8 => Ok(Self {
-                opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
-            }),
-            Opcode::LdAImm8 => Ok(Self {
-                opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
-            }),
+
             _ => Err(InstructionDecodeError::NotImplemented),
         }
     }
