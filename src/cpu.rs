@@ -72,7 +72,7 @@ impl Cpu {
 
 #[cfg(test)]
 impl Cpu {
-    pub fn cpu_with_program(program: &[u8]) -> Cpu {
+    pub fn new_with_program(program: &[u8]) -> Cpu {
         let mut memory = FlatMemory::new();
 
         for (i, byte) in program.iter().enumerate() {

@@ -22,6 +22,12 @@ impl Instruction {
         match self.opcode {
             Opcode::Nop => Ok(()),
             Opcode::LdBImm8 => Ok(cpu.set_register8(reg!(B), unpack_operands!(operands, Imm8))),
+            Opcode::LdCImm8 => Ok(cpu.set_register8(reg!(C), unpack_operands!(operands, Imm8))),
+            Opcode::LdDImm8 => Ok(cpu.set_register8(reg!(D), unpack_operands!(operands, Imm8))),
+            Opcode::LdEImm8 => Ok(cpu.set_register8(reg!(E), unpack_operands!(operands, Imm8))),
+            Opcode::LdHImm8 => Ok(cpu.set_register8(reg!(H), unpack_operands!(operands, Imm8))),
+            Opcode::LdLImm8 => Ok(cpu.set_register8(reg!(L), unpack_operands!(operands, Imm8))),
+            Opcode::LdAImm8 => Ok(cpu.set_register8(reg!(A), unpack_operands!(operands, Imm8))),
             _ => Err(InstructionExecuteError::NotImplemented),
         }
     }
