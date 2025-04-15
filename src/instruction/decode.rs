@@ -5,9 +5,16 @@ use thiserror::Error;
 impl Instruction {
     pub fn decode(opcode: Opcode, cpu: &mut Cpu) -> Result<Self, InstructionDecodeError> {
         match opcode {
+            // Nop
             Opcode::Nop => Ok(Self {
                 opcode,
                 operands: (Operand::None, Operand::None),
+            }),
+
+            // Jump
+            Opcode::JpImm16 => Ok(Self {
+                opcode,
+                operands: (Operand::Imm16(cpu.fetch_word()), Operand::None),
             }),
 
             // Ld r8 Imm8

@@ -26,7 +26,11 @@ impl Instruction {
     pub fn execute(&self, cpu: &mut Cpu) -> Result<(), InstructionExecuteError> {
         let operands = &self.operands;
         match self.opcode {
+            // Nop
             Opcode::Nop => Ok(()),
+
+            // Jump
+            Opcode::JpImm16 => Ok(cpu.set_pc(unpack_operands!(operands, Imm16))),
 
             // Ld r8 imm8
             Opcode::LdBImm8 => Ok(cpu.set_register8(reg!(B), unpack_operands!(operands, Imm8))),

@@ -10,7 +10,7 @@ use crate::{
     instruction::{
         Instruction, InstructionDecodeError, InstructionExecuteError, Opcode, OpcodeDecodeError,
     },
-    memory::{FlatMemory, MemoryBus},
+    memory::{FlatMemory, MemoryBus}, util,
 };
 
 pub struct Cpu {
@@ -44,6 +44,16 @@ impl Cpu {
         let value = self.memory.read(self.pc);
         self.pc = self.pc.wrapping_add(1);
         value
+    }
+
+    pub fn fetch_word(&mut self) -> u16 {
+        let low_byte = self.fetch_byte();
+        let high_byte = self.fetch_byte();
+        util::concat_bytes(high_byte, low_byte)
+    }
+
+    pub fn set_pc(&mut self, value: u16) {
+        self.pc = value
     }
 
     pub fn new(memory: Box<dyn MemoryBus>) -> Self {
@@ -84,4 +94,9 @@ impl Cpu {
         cpu.pc = 0x0100;
         cpu
     }
+ 
+    pub fn pc(&self) -> u16 {
+        self.pc
+    }
+
 }

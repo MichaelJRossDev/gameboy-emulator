@@ -7,6 +7,7 @@
 mod instruction;
 mod cpu;
 mod memory;
+mod util;
 
 fn main() {
 }

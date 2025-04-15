@@ -2,7 +2,11 @@ use std::convert::TryFrom;
 use thiserror::Error;
 
 pub enum Opcode {
+    //Nop
     Nop,
+
+    //Jump
+    JpImm16,
 
     //Ld r8 imm8
     LdBImm8,
@@ -20,7 +24,6 @@ pub enum Opcode {
     LdBE,
     LdBH,
     LdBL,
-    LdBFromMemHL,
     LdBA,
     LdCB,
     LdCC,
@@ -28,7 +31,6 @@ pub enum Opcode {
     LdCE,
     LdCH,
     LdCL,
-    LdCFromMemHL,
     LdCA,
     LdDB,
     LdDC,
@@ -36,7 +38,6 @@ pub enum Opcode {
     LdDE,
     LdDH,
     LdDL,
-    LdDFromMemHL,
     LdDA,
     LdEB,
     LdEC,
@@ -44,7 +45,6 @@ pub enum Opcode {
     LdEE,
     LdEH,
     LdEL,
-    LdEFromMemHL,
     LdEA,
     LdHB,
     LdHC,
@@ -52,7 +52,6 @@ pub enum Opcode {
     LdHE,
     LdHH,
     LdHL,
-    LdHFromMemHL,
     LdHA,
     LdLB,
     LdLC,
@@ -60,8 +59,15 @@ pub enum Opcode {
     LdLE,
     LdLH,
     LdLL,
-    LdLFromMemHL,
     LdLA,
+    LdAB,
+    LdAC,
+    LdAD,
+    LdAE,
+    LdAH,
+    LdAL,
+    LdAA,
+
     LdMemHLB,
     LdMemHLC,
     LdMemHLD,
@@ -69,14 +75,13 @@ pub enum Opcode {
     LdMemHLH,
     LdMemHLL,
     LdMemHLA,
-    LdAB,
-    LdAC,
-    LdAD,
-    LdAE,
-    LdAH,
-    LdAL,
+    LdBFromMemHL,
+    LdCFromMemHL,
+    LdDFromMemHL,
+    LdEFromMemHL,
+    LdHFromMemHL,
+    LdLFromMemHL,
     LdAFromMemHL,
-    LdAA,
 }
 
 impl TryFrom<u8> for Opcode {
@@ -84,7 +89,11 @@ impl TryFrom<u8> for Opcode {
 
     fn try_from(byte: u8) -> Result<Self, Self::Error> {
         match byte {
+            // Nop
             0x00 => Ok(Opcode::Nop),
+
+            // Jump
+            0xC3 => Ok(Opcode::JpImm16),
 
             // Ld r8 imm8
             0x06 => Ok(Opcode::LdBImm8),
