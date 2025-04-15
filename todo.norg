@@ -2,7 +2,7 @@
 
 * Phase 1: Bootstrapping – Core Flow & Registers
   - (x) NOP (0x00)
-  - ( ) JP addr (0xC3)
+  - (x) JP addr (0xC3)
   - (x) LD r, n (e.g. 0x06, 0x0E)
   - (x) LD r1, r2 (register-to-register loads)
   - ( ) LD A, (nn) / LD (nn), A
