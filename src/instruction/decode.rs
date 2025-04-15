@@ -69,6 +69,14 @@ impl Instruction {
                 operands: (Operand::None, Operand::None),
             }),
 
+            Opcode::LdAA
+            | Opcode::LdBB
+            | Opcode::LdCC
+            | Opcode::LdDD
+            | Opcode::LdEE
+            | Opcode::LdHH
+            | Opcode::LdLL => Ok(Self {opcode, operands: (Operand::None, Operand::None)}),
+
             _ => Err(InstructionDecodeError::NotImplemented),
         }
     }
