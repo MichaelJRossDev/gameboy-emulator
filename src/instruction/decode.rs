@@ -84,6 +84,8 @@ impl Instruction {
             | Opcode::LdHH
             | Opcode::LdLL => Ok(Self {opcode, operands: (Operand::None, Operand::None)}),
 
+            Opcode::LdAFromAddr => Ok(Self {opcode, operands: (Operand::Address(cpu.fetch_word()), Operand::None)}),
+
             _ => Err(InstructionDecodeError::NotImplemented),
         }
     }

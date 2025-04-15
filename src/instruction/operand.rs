@@ -6,4 +6,5 @@ pub enum Operand {
     Imm16(u16),
     Register8(Register8),
     Register16(Register16),
+    Address(u16)
 }

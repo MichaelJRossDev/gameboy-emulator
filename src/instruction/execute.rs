@@ -111,6 +111,9 @@ impl Instruction {
             Opcode::LdEFromMemHL => todo!(),
             Opcode::LdHFromMemHL => todo!(),
             Opcode::LdLFromMemHL => todo!(),
+
+            // Ld A from Address
+            Opcode::LdAFromAddr => Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operands!(operands, Address)))),
         }
     }
 }

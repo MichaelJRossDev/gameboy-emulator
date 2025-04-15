@@ -52,6 +52,14 @@ impl Cpu {
         util::concat_bytes(high_byte, low_byte)
     }
 
+    pub fn read(&self, address: u16) -> u8 {
+        self.memory.read(address)
+    }
+
+    pub fn write(&mut self, address: u16, value: u8) {
+        self.memory.write(address, value)
+    }
+
     pub fn set_pc(&mut self, value: u16) {
         self.pc = value
     }
