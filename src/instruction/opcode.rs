@@ -84,6 +84,7 @@ pub enum Opcode {
     LdAFromMemHL,
 
     LdAFromAddr,
+    LdAddrA,
 }
 
 impl TryFrom<u8> for Opcode {
@@ -172,6 +173,7 @@ impl TryFrom<u8> for Opcode {
             0x7F => Ok(Opcode::LdAA),
 
             0xFA => Ok(Opcode::LdAFromAddr),
+            0xEA => Ok(Opcode::LdAddrA),
 
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }

@@ -1,5 +1,8 @@
 use super::{Instruction, Opcode, Operand};
-use crate::{cpu::{registers::Register8, Cpu}, reg};
+use crate::{
+    cpu::{Cpu, registers::Register8},
+    reg,
+};
 use thiserror::Error;
 
 macro_rules! unpack_operands {
@@ -113,7 +116,14 @@ impl Instruction {
             Opcode::LdLFromMemHL => todo!(),
 
             // Ld A from Address
-            Opcode::LdAFromAddr => Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operands!(operands, Address)))),
+            Opcode::LdAFromAddr => {
+                Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operands!(operands, Address))))
+            },
+
+            Opcode::LdAddrA => Ok(cpu.write(
+                unpack_operands!(operands, Address),
+                cpu.get_register8(reg!(A)),
+            )),
         }
     }
 }
