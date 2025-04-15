@@ -5,9 +5,9 @@
   - (x) JP addr (0xC3)
   - (x) LD r, n (e.g. 0x06, 0x0E)
   - (x) LD r1, r2 (register-to-register loads)
-  - ( ) LD A, (nn) / LD (nn), A
-  	- ( ) Fetch word
-  	- ( ) Construct an imm16 from a fetched word
+  - (x) LD A, (nn) / LD (nn), A
+  	- (x) Fetch word
+  	- (x) Construct an imm16 from a fetched word
   - ( ) INC r / DEC r
   - ( ) LD HL, SP+n / LD SP, HL
   - ( ) Test: Run a ROM with register loads and an infinite loop
