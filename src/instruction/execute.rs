@@ -107,18 +107,32 @@ impl Instruction {
             Opcode::LdMemHLL => todo!(),
 
             // Ld r8 MemHL
-            Opcode::LdAFromMemHL => todo!(),
-            Opcode::LdBFromMemHL => todo!(),
-            Opcode::LdCFromMemHL => todo!(),
-            Opcode::LdDFromMemHL => todo!(),
-            Opcode::LdEFromMemHL => todo!(),
-            Opcode::LdHFromMemHL => todo!(),
-            Opcode::LdLFromMemHL => todo!(),
+            Opcode::LdAFromMemHL => {
+                Ok(cpu.set_register8(reg!(A), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdBFromMemHL => {
+                Ok(cpu.set_register8(reg!(B), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdCFromMemHL => {
+                Ok(cpu.set_register8(reg!(C), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdDFromMemHL => {
+                Ok(cpu.set_register8(reg!(D), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdEFromMemHL => {
+                Ok(cpu.set_register8(reg!(E), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdHFromMemHL => {
+                Ok(cpu.set_register8(reg!(H), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
+            Opcode::LdLFromMemHL => {
+                Ok(cpu.set_register8(reg!(L), cpu.read(cpu.get_register16(reg!(HL)))))
+            }
 
             // Ld A from Address
             Opcode::LdAFromAddr => {
                 Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operands!(operands, Address))))
-            },
+            }
 
             Opcode::LdAddrA => Ok(cpu.write(
                 unpack_operands!(operands, Address),
@@ -154,7 +168,6 @@ impl Instruction {
             Opcode::DecHL => Ok(cpu.sub_r16(reg!(HL), 1)),
             Opcode::DecBC => Ok(cpu.sub_r16(reg!(BC), 1)),
             Opcode::DecSP => Ok(cpu.sub_r16(reg!(SP), 1)),
-
         }
     }
 }
