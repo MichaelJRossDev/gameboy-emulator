@@ -76,16 +76,41 @@ impl Instruction {
                 operands: (Operand::None, Operand::None),
             }),
 
+            // Redundand Ld r8 r8
             Opcode::LdAA
             | Opcode::LdBB
             | Opcode::LdCC
             | Opcode::LdDD
             | Opcode::LdEE
             | Opcode::LdHH
-            | Opcode::LdLL => Ok(Self {opcode, operands: (Operand::None, Operand::None)}),
+            | Opcode::LdLL => Ok(Self {
+                opcode,
+                operands: (Operand::None, Operand::None),
+            }),
 
-            Opcode::LdAFromAddr
-            | Opcode::LdAddrA => Ok(Self {opcode, operands: (Operand::Address(cpu.fetch_word()), Operand::None)}),
+            // Inc/Dec r8
+            Opcode::IncA
+            | Opcode::IncB
+            | Opcode::IncC
+            | Opcode::IncD
+            | Opcode::IncE
+            | Opcode::IncH
+            | Opcode::IncL
+            | Opcode::DecA
+            | Opcode::DecB
+            | Opcode::DecC
+            | Opcode::DecD
+            | Opcode::DecE
+            | Opcode::DecH
+            | Opcode::DecL => Ok(Self {
+                opcode,
+                operands: (Operand::None, Operand::None),
+            }),
+
+            Opcode::LdAFromAddr | Opcode::LdAddrA => Ok(Self {
+                opcode,
+                operands: (Operand::Address(cpu.fetch_word()), Operand::None),
+            }),
 
             _ => Err(InstructionDecodeError::NotImplemented),
         }

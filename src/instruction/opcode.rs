@@ -68,6 +68,22 @@ pub enum Opcode {
     LdAL,
     LdAA,
 
+    //INC / DEC r8
+    IncA,
+    IncB,
+    IncC,
+    IncD,
+    IncE,
+    IncH,
+    IncL,
+    DecA,
+    DecB,
+    DecC,
+    DecD,
+    DecE,
+    DecH,
+    DecL,
+
     LdMemHLB,
     LdMemHLC,
     LdMemHLD,
@@ -172,8 +188,27 @@ impl TryFrom<u8> for Opcode {
             // 0x7E => Ok(Opcode::LdAFromMemHL),
             0x7F => Ok(Opcode::LdAA),
 
+            // Accumulator <=> Address
             0xFA => Ok(Opcode::LdAFromAddr),
             0xEA => Ok(Opcode::LdAddrA),
+
+            // Inc r8
+            0x3C => Ok(Opcode::IncA),
+            0x04 => Ok(Opcode::IncB),
+            0x0C => Ok(Opcode::IncC),
+            0x14 => Ok(Opcode::IncD),
+            0x1C => Ok(Opcode::IncE),
+            0x24 => Ok(Opcode::IncH),
+            0x2C => Ok(Opcode::IncL),
+
+            //Dec r8
+            0x3D => Ok(Opcode::DecA),
+            0x05 => Ok(Opcode::DecB),
+            0x0D => Ok(Opcode::DecC),
+            0x15 => Ok(Opcode::DecD),
+            0x1D => Ok(Opcode::DecE),
+            0x25 => Ok(Opcode::DecH),
+            0x2D => Ok(Opcode::DecL),
 
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }
