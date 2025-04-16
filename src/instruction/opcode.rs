@@ -68,7 +68,7 @@ pub enum Opcode {
     LdAL,
     LdAA,
 
-    //INC / DEC r8
+    // INC r8
     IncA,
     IncB,
     IncC,
@@ -76,6 +76,8 @@ pub enum Opcode {
     IncE,
     IncH,
     IncL,
+
+    // DEC r8
     DecA,
     DecB,
     DecC,
@@ -83,6 +85,18 @@ pub enum Opcode {
     DecE,
     DecH,
     DecL,
+
+    // INC r16
+    IncBC,
+    IncDE,
+    IncHL,
+    IncSP,
+
+    // DEC r16
+    DecBC,
+    DecDE,
+    DecHL,
+    DecSP,
 
     LdMemHLB,
     LdMemHLC,
@@ -209,6 +223,18 @@ impl TryFrom<u8> for Opcode {
             0x1D => Ok(Opcode::DecE),
             0x25 => Ok(Opcode::DecH),
             0x2D => Ok(Opcode::DecL),
+
+            // Inc r16
+            0x03 => Ok(Opcode::IncBC),
+            0x13 => Ok(Opcode::IncDE),
+            0x23 => Ok(Opcode::IncHL),
+            0x33 => Ok(Opcode::IncSP),
+
+            // Dec r16
+            0x0B => Ok(Opcode::DecBC),
+            0x1B => Ok(Opcode::DecDE),
+            0x2B => Ok(Opcode::DecHL),
+            0x3B => Ok(Opcode::DecSP),
 
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }

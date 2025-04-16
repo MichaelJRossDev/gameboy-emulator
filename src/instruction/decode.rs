@@ -88,7 +88,7 @@ impl Instruction {
                 operands: (Operand::None, Operand::None),
             }),
 
-            // Inc/Dec r8
+            // Inc/Dec r8/r16
             Opcode::IncA
             | Opcode::IncB
             | Opcode::IncC
@@ -102,7 +102,15 @@ impl Instruction {
             | Opcode::DecD
             | Opcode::DecE
             | Opcode::DecH
-            | Opcode::DecL => Ok(Self {
+            | Opcode::DecL
+            | Opcode::IncBC
+            | Opcode::IncDE
+            | Opcode::IncHL
+            | Opcode::IncSP
+            | Opcode::DecBC
+            | Opcode::DecDE
+            | Opcode::DecHL
+            | Opcode::DecSP => Ok(Self {
                 opcode,
                 operands: (Operand::None, Operand::None),
             }),

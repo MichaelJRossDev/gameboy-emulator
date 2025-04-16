@@ -142,6 +142,19 @@ impl Instruction {
             Opcode::DecE => Ok(cpu.sub_r8(reg!(E), 1)),
             Opcode::DecH => Ok(cpu.sub_r8(reg!(H), 1)),
             Opcode::DecL => Ok(cpu.sub_r8(reg!(L), 1)),
+
+            // Inc r16
+            Opcode::IncBC => Ok(cpu.add_r16(reg!(BC), 1)),
+            Opcode::IncHL => Ok(cpu.add_r16(reg!(HL), 1)),
+            Opcode::IncDE => Ok(cpu.add_r16(reg!(DE), 1)),
+            Opcode::IncSP => Ok(cpu.add_r16(reg!(SP), 1)),
+
+            // Dec r16
+            Opcode::DecDE => Ok(cpu.sub_r16(reg!(DE), 1)),
+            Opcode::DecHL => Ok(cpu.sub_r16(reg!(HL), 1)),
+            Opcode::DecBC => Ok(cpu.sub_r16(reg!(BC), 1)),
+            Opcode::DecSP => Ok(cpu.sub_r16(reg!(SP), 1)),
+
         }
     }
 }
