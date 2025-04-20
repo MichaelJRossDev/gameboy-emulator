@@ -18,13 +18,7 @@ impl Instruction {
             }),
 
             // Ld r8 Imm8
-            Opcode::LdBImm8
-            | Opcode::LdCImm8
-            | Opcode::LdDImm8
-            | Opcode::LdEImm8
-            | Opcode::LdHImm8
-            | Opcode::LdLImm8
-            | Opcode::LdAImm8 => Ok(Self {
+            | Opcode::LdR8(_) => Ok(Self {
                 opcode,
                 operand: Operand::Imm8(cpu.fetch_byte()),
             }),

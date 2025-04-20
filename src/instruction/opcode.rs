@@ -1,6 +1,8 @@
 use std::convert::TryFrom;
 use thiserror::Error;
 
+use crate::{cpu::registers::Register8, reg};
+
 pub enum Opcode {
     //Nop
     Nop,
@@ -9,13 +11,7 @@ pub enum Opcode {
     JpImm16,
 
     //Ld r8 imm8
-    LdBImm8,
-    LdCImm8,
-    LdDImm8,
-    LdEImm8,
-    LdHImm8,
-    LdLImm8,
-    LdAImm8,
+    LdR8(Register8),
 
     //Ld r8 r8
     LdBB,
@@ -129,13 +125,13 @@ impl TryFrom<u8> for Opcode {
             0xC3 => Ok(Opcode::JpImm16),
 
             // Ld r8 imm8
-            0x06 => Ok(Opcode::LdBImm8),
-            0x0E => Ok(Opcode::LdCImm8),
-            0x16 => Ok(Opcode::LdDImm8),
-            0x1E => Ok(Opcode::LdEImm8),
-            0x26 => Ok(Opcode::LdHImm8),
-            0x2E => Ok(Opcode::LdLImm8),
-            0x3E => Ok(Opcode::LdAImm8),
+            0x06 => Ok(Opcode::LdR8(reg!(B))),
+            0x0E => Ok(Opcode::LdR8(reg!(C))),
+            0x16 => Ok(Opcode::LdR8(reg!(D))),
+            0x1E => Ok(Opcode::LdR8(reg!(E))),
+            0x26 => Ok(Opcode::LdR8(reg!(H))),
+            0x2E => Ok(Opcode::LdR8(reg!(L))),
+            0x3E => Ok(Opcode::LdR8(reg!(A))),
 
             // Ld r8 r8
             0x40 => Ok(Opcode::LdBB),

@@ -22,13 +22,7 @@ impl Instruction {
             Opcode::JpImm16 => Ok(cpu.set_pc(unpack_operand!(operand, Imm16))),
 
             // Ld r8 imm8
-            Opcode::LdBImm8 => Ok(cpu.set_register8(reg!(B), unpack_operand!(operand, Imm8))),
-            Opcode::LdCImm8 => Ok(cpu.set_register8(reg!(C), unpack_operand!(operand, Imm8))),
-            Opcode::LdDImm8 => Ok(cpu.set_register8(reg!(D), unpack_operand!(operand, Imm8))),
-            Opcode::LdEImm8 => Ok(cpu.set_register8(reg!(E), unpack_operand!(operand, Imm8))),
-            Opcode::LdHImm8 => Ok(cpu.set_register8(reg!(H), unpack_operand!(operand, Imm8))),
-            Opcode::LdLImm8 => Ok(cpu.set_register8(reg!(L), unpack_operand!(operand, Imm8))),
-            Opcode::LdAImm8 => Ok(cpu.set_register8(reg!(A), unpack_operand!(operand, Imm8))),
+            Opcode::LdR8(r8) => Ok(cpu.set_register8(r8, unpack_operand!(operand, Imm8))),
 
             // Ld r8 r8
             Opcode::LdBC => Ok(ld_r8_r8!(cpu, B, C)),
