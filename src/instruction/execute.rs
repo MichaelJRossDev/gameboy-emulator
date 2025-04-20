@@ -1,23 +1,9 @@
 use super::{Instruction, Opcode, Operand};
 use crate::{
     cpu::{Cpu, registers::Register8},
-    reg,
+    reg, unpack_operand,
 };
 use thiserror::Error;
-
-macro_rules! unpack_operands {
-    ($tuple:ident, $type1:ident) => {
-        match $tuple.0 {
-            Operand::$type1(a) => a,
-            _ => {
-                return Err(InstructionExecuteError::UnexpectedOperand {
-                    expected: stringify!($type1),
-                    received: stringify!($tuple.0),
-                })
-            }
-        }
-    };
-}
 
 macro_rules! ld_r8_r8 {
     ($cpu:ident, $set:ident, $get:ident) => {
@@ -27,22 +13,22 @@ macro_rules! ld_r8_r8 {
 
 impl Instruction {
     pub fn execute(&self, cpu: &mut Cpu) -> Result<(), InstructionExecuteError> {
-        let operands = &self.operands;
+        let operand = &self.operand;
         match self.opcode {
             // Nop
             Opcode::Nop => Ok(()),
 
             // Jump
-            Opcode::JpImm16 => Ok(cpu.set_pc(unpack_operands!(operands, Imm16))),
+            Opcode::JpImm16 => Ok(cpu.set_pc(unpack_operand!(operand, Imm16))),
 
             // Ld r8 imm8
-            Opcode::LdBImm8 => Ok(cpu.set_register8(reg!(B), unpack_operands!(operands, Imm8))),
-            Opcode::LdCImm8 => Ok(cpu.set_register8(reg!(C), unpack_operands!(operands, Imm8))),
-            Opcode::LdDImm8 => Ok(cpu.set_register8(reg!(D), unpack_operands!(operands, Imm8))),
-            Opcode::LdEImm8 => Ok(cpu.set_register8(reg!(E), unpack_operands!(operands, Imm8))),
-            Opcode::LdHImm8 => Ok(cpu.set_register8(reg!(H), unpack_operands!(operands, Imm8))),
-            Opcode::LdLImm8 => Ok(cpu.set_register8(reg!(L), unpack_operands!(operands, Imm8))),
-            Opcode::LdAImm8 => Ok(cpu.set_register8(reg!(A), unpack_operands!(operands, Imm8))),
+            Opcode::LdBImm8 => Ok(cpu.set_register8(reg!(B), unpack_operand!(operand, Imm8))),
+            Opcode::LdCImm8 => Ok(cpu.set_register8(reg!(C), unpack_operand!(operand, Imm8))),
+            Opcode::LdDImm8 => Ok(cpu.set_register8(reg!(D), unpack_operand!(operand, Imm8))),
+            Opcode::LdEImm8 => Ok(cpu.set_register8(reg!(E), unpack_operand!(operand, Imm8))),
+            Opcode::LdHImm8 => Ok(cpu.set_register8(reg!(H), unpack_operand!(operand, Imm8))),
+            Opcode::LdLImm8 => Ok(cpu.set_register8(reg!(L), unpack_operand!(operand, Imm8))),
+            Opcode::LdAImm8 => Ok(cpu.set_register8(reg!(A), unpack_operand!(operand, Imm8))),
 
             // Ld r8 r8
             Opcode::LdBC => Ok(ld_r8_r8!(cpu, B, C)),
@@ -131,11 +117,11 @@ impl Instruction {
 
             // Ld A from Address
             Opcode::LdAFromAddr => {
-                Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operands!(operands, Address))))
+                Ok(cpu.set_register8(reg!(A), cpu.read(unpack_operand!(operand, Address))))
             }
 
             Opcode::LdAddrA => Ok(cpu.write(
-                unpack_operands!(operands, Address),
+                unpack_operand!(operand, Address),
                 cpu.get_register8(reg!(A)),
             )),
 

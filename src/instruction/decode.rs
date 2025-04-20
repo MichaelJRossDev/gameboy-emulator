@@ -8,13 +8,13 @@ impl Instruction {
             // Nop
             Opcode::Nop => Ok(Self {
                 opcode,
-                operands: (Operand::None, Operand::None),
+                operand: Operand::None,
             }),
 
             // Jump
             Opcode::JpImm16 => Ok(Self {
                 opcode,
-                operands: (Operand::Imm16(cpu.fetch_word()), Operand::None),
+                operand: Operand::Imm16(cpu.fetch_word()),
             }),
 
             // Ld r8 Imm8
@@ -26,7 +26,7 @@ impl Instruction {
             | Opcode::LdLImm8
             | Opcode::LdAImm8 => Ok(Self {
                 opcode,
-                operands: (Operand::Imm8(cpu.fetch_byte()), Operand::None),
+                operand: Operand::Imm8(cpu.fetch_byte()),
             }),
 
             // Ld r8 r8
@@ -73,7 +73,7 @@ impl Instruction {
             | Opcode::LdAH
             | Opcode::LdAL => Ok(Self {
                 opcode,
-                operands: (Operand::None, Operand::None),
+                operand: Operand::None,
             }),
 
             // Redundand Ld r8 r8
@@ -85,7 +85,7 @@ impl Instruction {
             | Opcode::LdHH
             | Opcode::LdLL => Ok(Self {
                 opcode,
-                operands: (Operand::None, Operand::None),
+                operand: Operand::None,
             }),
 
             // Inc/Dec r8/r16
@@ -112,12 +112,12 @@ impl Instruction {
             | Opcode::DecHL
             | Opcode::DecSP => Ok(Self {
                 opcode,
-                operands: (Operand::None, Operand::None),
+                operand: Operand::None,
             }),
 
             Opcode::LdAFromAddr | Opcode::LdAddrA => Ok(Self {
                 opcode,
-                operands: (Operand::Address(cpu.fetch_word()), Operand::None),
+                operand: Operand::Address(cpu.fetch_word()),
             }),
 
             _ => Err(InstructionDecodeError::NotImplemented),

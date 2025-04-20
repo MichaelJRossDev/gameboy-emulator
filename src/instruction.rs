@@ -13,6 +13,6 @@ mod tests;
 
 pub struct Instruction {
     opcode: Opcode,
-    operands: (Operand, Operand),
+    operand: Operand,
 }
 
