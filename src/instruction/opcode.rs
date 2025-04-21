@@ -28,13 +28,8 @@ pub enum Opcode {
     // DEC r16
     DecR16(Register16),
 
-    LdMemHLB,
-    LdMemHLC,
-    LdMemHLD,
-    LdMemHLE,
-    LdMemHLH,
-    LdMemHLL,
-    LdMemHLA,
+    // Ld MemHL r8
+    LdMemHLR8(Register8),
 
     LdR8FromMemHL(Register8),
 
@@ -156,14 +151,14 @@ impl TryFrom<u8> for Opcode {
             0x6E => Ok(Opcode::LdR8FromMemHL(reg!(L))),
             0x7E => Ok(Opcode::LdR8FromMemHL(reg!(A))),
 
-            // Write r8 to MemHL
-            // 0x70 => Ok(Opcode::LdMemHLB),
-            // 0x71 => Ok(Opcode::LdMemHLC),
-            // 0x72 => Ok(Opcode::LdMemHLD),
-            // 0x73 => Ok(Opcode::LdMemHLE),
-            // 0x74 => Ok(Opcode::LdMemHLH),
-            // 0x75 => Ok(Opcode::LdMemHLL),
-            // 0x77 => Ok(Opcode::LdMemHLA),
+            // Write MemHL R8
+            0x70 => Ok(Opcode::LdMemHLR8(reg!(B))),
+            0x71 => Ok(Opcode::LdMemHLR8(reg!(C))),
+            0x72 => Ok(Opcode::LdMemHLR8(reg!(D))),
+            0x73 => Ok(Opcode::LdMemHLR8(reg!(E))),
+            0x74 => Ok(Opcode::LdMemHLR8(reg!(H))),
+            0x75 => Ok(Opcode::LdMemHLR8(reg!(L))),
+            0x77 => Ok(Opcode::LdMemHLR8(reg!(A))),
 
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }

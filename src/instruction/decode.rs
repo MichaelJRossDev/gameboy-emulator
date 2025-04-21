@@ -43,7 +43,12 @@ impl Instruction {
                 operand: Operand::Address(cpu.fetch_word()),
             }),
 
-            Opcode::LdR8FromMemHL(reg) => Ok(Self {
+            Opcode::LdR8FromMemHL(_) => Ok(Self {
+                opcode,
+                operand: Operand::None,
+            }),
+
+            Opcode::LdMemHLR8(_) => Ok(Self {
                 opcode,
                 operand: Operand::None,
             }),

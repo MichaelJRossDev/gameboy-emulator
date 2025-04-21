@@ -22,13 +22,9 @@ impl Instruction {
             Opcode::LdR8R8 { dst, src } => Ok(cpu.set_register8(dst, cpu.get_register8(src))),
 
             // Ld MemHL r8
-            Opcode::LdMemHLA => todo!(),
-            Opcode::LdMemHLB => todo!(),
-            Opcode::LdMemHLC => todo!(),
-            Opcode::LdMemHLD => todo!(),
-            Opcode::LdMemHLE => todo!(),
-            Opcode::LdMemHLH => todo!(),
-            Opcode::LdMemHLL => todo!(),
+            Opcode::LdMemHLR8(reg) => {
+                Ok(cpu.write(cpu.get_register16(reg!(HL)), cpu.get_register8(reg)))
+            }
 
             // Ld r8 MemHL
             Opcode::LdR8FromMemHL(reg) => {
