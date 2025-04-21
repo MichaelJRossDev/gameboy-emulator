@@ -30,20 +30,8 @@ impl Instruction {
             }),
 
             // Inc/Dec r8/r16
-            Opcode::IncA
-            | Opcode::IncB
-            | Opcode::IncC
-            | Opcode::IncD
-            | Opcode::IncE
-            | Opcode::IncH
-            | Opcode::IncL
-            | Opcode::DecA
-            | Opcode::DecB
-            | Opcode::DecC
-            | Opcode::DecD
-            | Opcode::DecE
-            | Opcode::DecH
-            | Opcode::DecL
+            Opcode::IncR8(_)
+            | Opcode::DecR8(_)
             | Opcode::IncBC
             | Opcode::IncDE
             | Opcode::IncHL

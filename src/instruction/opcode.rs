@@ -17,22 +17,10 @@ pub enum Opcode {
     LdR8R8 { dst: Register8, src: Register8 },
 
     // INC r8
-    IncA,
-    IncB,
-    IncC,
-    IncD,
-    IncE,
-    IncH,
-    IncL,
+    IncR8(Register8),
 
     // DEC r8
-    DecA,
-    DecB,
-    DecC,
-    DecD,
-    DecE,
-    DecH,
-    DecL,
+    DecR8(Register8),
 
     // INC r16
     IncBC,
@@ -141,22 +129,22 @@ impl TryFrom<u8> for Opcode {
             0xEA => Ok(Opcode::LdAddrA),
 
             // Inc r8
-            0x3C => Ok(Opcode::IncA),
-            0x04 => Ok(Opcode::IncB),
-            0x0C => Ok(Opcode::IncC),
-            0x14 => Ok(Opcode::IncD),
-            0x1C => Ok(Opcode::IncE),
-            0x24 => Ok(Opcode::IncH),
-            0x2C => Ok(Opcode::IncL),
+            0x3C => Ok(Opcode::IncR8(reg!(A))),
+            0x04 => Ok(Opcode::IncR8(reg!(B))),
+            0x0C => Ok(Opcode::IncR8(reg!(C))),
+            0x14 => Ok(Opcode::IncR8(reg!(D))),
+            0x1C => Ok(Opcode::IncR8(reg!(E))),
+            0x24 => Ok(Opcode::IncR8(reg!(H))),
+            0x2C => Ok(Opcode::IncR8(reg!(L))),
 
             //Dec r8
-            0x3D => Ok(Opcode::DecA),
-            0x05 => Ok(Opcode::DecB),
-            0x0D => Ok(Opcode::DecC),
-            0x15 => Ok(Opcode::DecD),
-            0x1D => Ok(Opcode::DecE),
-            0x25 => Ok(Opcode::DecH),
-            0x2D => Ok(Opcode::DecL),
+            0x3D => Ok(Opcode::DecR8(reg!(A))),
+            0x05 => Ok(Opcode::DecR8(reg!(B))),
+            0x0D => Ok(Opcode::DecR8(reg!(C))),
+            0x15 => Ok(Opcode::DecR8(reg!(D))),
+            0x1D => Ok(Opcode::DecR8(reg!(E))),
+            0x25 => Ok(Opcode::DecR8(reg!(H))),
+            0x2D => Ok(Opcode::DecR8(reg!(L))),
 
             // Inc r16
             0x03 => Ok(Opcode::IncBC),

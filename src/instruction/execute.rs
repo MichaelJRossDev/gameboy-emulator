@@ -70,22 +70,10 @@ impl Instruction {
             )),
 
             // Inc r8
-            Opcode::IncA => Ok(cpu.add_r8(reg!(A), 1)),
-            Opcode::IncB => Ok(cpu.add_r8(reg!(B), 1)),
-            Opcode::IncC => Ok(cpu.add_r8(reg!(C), 1)),
-            Opcode::IncD => Ok(cpu.add_r8(reg!(D), 1)),
-            Opcode::IncE => Ok(cpu.add_r8(reg!(E), 1)),
-            Opcode::IncH => Ok(cpu.add_r8(reg!(H), 1)),
-            Opcode::IncL => Ok(cpu.add_r8(reg!(L), 1)),
+            Opcode::IncR8(reg) => Ok(cpu.add_r8(reg, 1)),
 
             // Dec r8
-            Opcode::DecA => Ok(cpu.sub_r8(reg!(A), 1)),
-            Opcode::DecB => Ok(cpu.sub_r8(reg!(B), 1)),
-            Opcode::DecC => Ok(cpu.sub_r8(reg!(C), 1)),
-            Opcode::DecD => Ok(cpu.sub_r8(reg!(D), 1)),
-            Opcode::DecE => Ok(cpu.sub_r8(reg!(E), 1)),
-            Opcode::DecH => Ok(cpu.sub_r8(reg!(H), 1)),
-            Opcode::DecL => Ok(cpu.sub_r8(reg!(L), 1)),
+            Opcode::DecR8(reg) => Ok(cpu.sub_r8(reg, 1)),
 
             // Inc r16
             Opcode::IncBC => Ok(cpu.add_r16(reg!(BC), 1)),
