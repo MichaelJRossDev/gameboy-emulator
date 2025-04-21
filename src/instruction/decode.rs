@@ -18,66 +18,13 @@ impl Instruction {
             }),
 
             // Ld r8 Imm8
-            | Opcode::LdR8(_) => Ok(Self {
+            Opcode::LdR8(_) => Ok(Self {
                 opcode,
                 operand: Operand::Imm8(cpu.fetch_byte()),
             }),
 
             // Ld r8 r8
-            Opcode::LdBC
-            | Opcode::LdBD
-            | Opcode::LdBE
-            | Opcode::LdBH
-            | Opcode::LdBL
-            | Opcode::LdBA
-            | Opcode::LdCB
-            | Opcode::LdCD
-            | Opcode::LdCE
-            | Opcode::LdCH
-            | Opcode::LdCL
-            | Opcode::LdCA
-            | Opcode::LdDB
-            | Opcode::LdDC
-            | Opcode::LdDE
-            | Opcode::LdDH
-            | Opcode::LdDL
-            | Opcode::LdDA
-            | Opcode::LdEB
-            | Opcode::LdEC
-            | Opcode::LdED
-            | Opcode::LdEH
-            | Opcode::LdEL
-            | Opcode::LdEA
-            | Opcode::LdHB
-            | Opcode::LdHC
-            | Opcode::LdHD
-            | Opcode::LdHE
-            | Opcode::LdHL
-            | Opcode::LdHA
-            | Opcode::LdLB
-            | Opcode::LdLC
-            | Opcode::LdLD
-            | Opcode::LdLE
-            | Opcode::LdLH
-            | Opcode::LdLA
-            | Opcode::LdAB
-            | Opcode::LdAC
-            | Opcode::LdAD
-            | Opcode::LdAE
-            | Opcode::LdAH
-            | Opcode::LdAL => Ok(Self {
-                opcode,
-                operand: Operand::None,
-            }),
-
-            // Redundand Ld r8 r8
-            Opcode::LdAA
-            | Opcode::LdBB
-            | Opcode::LdCC
-            | Opcode::LdDD
-            | Opcode::LdEE
-            | Opcode::LdHH
-            | Opcode::LdLL => Ok(Self {
+            Opcode::LdR8R8 { dst, src } => Ok(Self {
                 opcode,
                 operand: Operand::None,
             }),
