@@ -76,16 +76,10 @@ impl Instruction {
             Opcode::DecR8(reg) => Ok(cpu.sub_r8(reg, 1)),
 
             // Inc r16
-            Opcode::IncBC => Ok(cpu.add_r16(reg!(BC), 1)),
-            Opcode::IncHL => Ok(cpu.add_r16(reg!(HL), 1)),
-            Opcode::IncDE => Ok(cpu.add_r16(reg!(DE), 1)),
-            Opcode::IncSP => Ok(cpu.add_r16(reg!(SP), 1)),
+            Opcode::IncR16(reg) => Ok(cpu.add_r16(reg, 1)),
 
             // Dec r16
-            Opcode::DecDE => Ok(cpu.sub_r16(reg!(DE), 1)),
-            Opcode::DecHL => Ok(cpu.sub_r16(reg!(HL), 1)),
-            Opcode::DecBC => Ok(cpu.sub_r16(reg!(BC), 1)),
-            Opcode::DecSP => Ok(cpu.sub_r16(reg!(SP), 1)),
+            Opcode::DecR16(reg) => Ok(cpu.sub_r16(reg, 1)),
         }
     }
 }

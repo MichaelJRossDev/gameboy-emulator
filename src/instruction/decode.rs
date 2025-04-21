@@ -32,14 +32,8 @@ impl Instruction {
             // Inc/Dec r8/r16
             Opcode::IncR8(_)
             | Opcode::DecR8(_)
-            | Opcode::IncBC
-            | Opcode::IncDE
-            | Opcode::IncHL
-            | Opcode::IncSP
-            | Opcode::DecBC
-            | Opcode::DecDE
-            | Opcode::DecHL
-            | Opcode::DecSP => Ok(Self {
+            | Opcode::IncR16(_)
+            | Opcode::DecR16(_) => Ok(Self {
                 opcode,
                 operand: Operand::None,
             }),

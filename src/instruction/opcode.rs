@@ -1,7 +1,7 @@
 use std::convert::TryFrom;
 use thiserror::Error;
 
-use crate::{cpu::registers::Register8, reg};
+use crate::{cpu::registers::{Register16, Register8}, reg};
 
 pub enum Opcode {
     //Nop
@@ -23,16 +23,10 @@ pub enum Opcode {
     DecR8(Register8),
 
     // INC r16
-    IncBC,
-    IncDE,
-    IncHL,
-    IncSP,
+    IncR16(Register16),
 
     // DEC r16
-    DecBC,
-    DecDE,
-    DecHL,
-    DecSP,
+    DecR16(Register16),
 
     LdMemHLB,
     LdMemHLC,
@@ -147,16 +141,16 @@ impl TryFrom<u8> for Opcode {
             0x2D => Ok(Opcode::DecR8(reg!(L))),
 
             // Inc r16
-            0x03 => Ok(Opcode::IncBC),
-            0x13 => Ok(Opcode::IncDE),
-            0x23 => Ok(Opcode::IncHL),
-            0x33 => Ok(Opcode::IncSP),
+            0x03 => Ok(Opcode::IncR16(reg!(BC))),
+            0x13 => Ok(Opcode::IncR16(reg!(DE))),
+            0x23 => Ok(Opcode::IncR16(reg!(HL))),
+            0x33 => Ok(Opcode::IncR16(reg!(SP))),
 
             // Dec r16
-            0x0B => Ok(Opcode::DecBC),
-            0x1B => Ok(Opcode::DecDE),
-            0x2B => Ok(Opcode::DecHL),
-            0x3B => Ok(Opcode::DecSP),
+            0x0B => Ok(Opcode::DecR16(reg!(BC))),
+            0x1B => Ok(Opcode::DecR16(reg!(DE))),
+            0x2B => Ok(Opcode::DecR16(reg!(HL))),
+            0x3B => Ok(Opcode::DecR16(reg!(SP))),
 
             // Ld r8 MemHL
             0x46 => Ok(Opcode::LdBFromMemHL),
