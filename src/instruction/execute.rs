@@ -52,6 +52,9 @@ impl Instruction {
 
             // Dec r16
             Opcode::DecR16(reg) => Ok(cpu.sub_r16(reg, 1)),
+
+            // Ld r16
+            Opcode::LdR16(reg) => Ok(cpu.set_register16(reg, unpack_operand!(operand, Imm16))),
         }
     }
 }

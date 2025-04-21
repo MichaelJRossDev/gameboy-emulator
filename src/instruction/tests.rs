@@ -7,4 +7,5 @@ mod inc_dec_r8;
 mod inc_dec_r16;
 mod ld_r8_memhl;
 mod ld_memhl_r8;
+mod ld_r16_imm16;
 mod opcode_coverage;

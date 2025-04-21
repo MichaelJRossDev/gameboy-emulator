@@ -30,13 +30,12 @@ impl Instruction {
             }),
 
             // Inc/Dec r8/r16
-            Opcode::IncR8(_)
-            | Opcode::DecR8(_)
-            | Opcode::IncR16(_)
-            | Opcode::DecR16(_) => Ok(Self {
-                opcode,
-                operand: Operand::None,
-            }),
+            Opcode::IncR8(_) | Opcode::DecR8(_) | Opcode::IncR16(_) | Opcode::DecR16(_) => {
+                Ok(Self {
+                    opcode,
+                    operand: Operand::None,
+                })
+            }
 
             Opcode::LdAFromAddr | Opcode::LdAddrA => Ok(Self {
                 opcode,
@@ -51,6 +50,11 @@ impl Instruction {
             Opcode::LdMemHLR8(_) => Ok(Self {
                 opcode,
                 operand: Operand::None,
+            }),
+
+            Opcode::LdR16(_) => Ok(Self {
+                opcode,
+                operand: Operand::Imm16(cpu.fetch_word()),
             }),
 
             _ => Err(InstructionDecodeError::NotImplemented),

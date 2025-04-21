@@ -13,6 +13,9 @@ pub enum Opcode {
     //Ld r8 imm8
     LdR8(Register8),
 
+    // Ld r16 imm8
+    LdR16(Register16),
+
     //Ld r8 r8
     LdR8R8 { dst: Register8, src: Register8 },
 
@@ -159,6 +162,11 @@ impl TryFrom<u8> for Opcode {
             0x74 => Ok(Opcode::LdMemHLR8(reg!(H))),
             0x75 => Ok(Opcode::LdMemHLR8(reg!(L))),
             0x77 => Ok(Opcode::LdMemHLR8(reg!(A))),
+
+            0x01 => Ok(Opcode::LdR16(reg!(BC))),
+            0x11 => Ok(Opcode::LdR16(reg!(DE))),
+            0x21 => Ok(Opcode::LdR16(reg!(HL))),
+            0x31 => Ok(Opcode::LdR16(reg!(SP))),
 
             _ => Err(OpcodeDecodeError::InvalidOpcode(byte)),
         }
