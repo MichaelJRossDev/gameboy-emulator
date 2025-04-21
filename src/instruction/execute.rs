@@ -37,26 +37,8 @@ impl Instruction {
             Opcode::LdMemHLL => todo!(),
 
             // Ld r8 MemHL
-            Opcode::LdAFromMemHL => {
-                Ok(cpu.set_register8(reg!(A), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdBFromMemHL => {
-                Ok(cpu.set_register8(reg!(B), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdCFromMemHL => {
-                Ok(cpu.set_register8(reg!(C), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdDFromMemHL => {
-                Ok(cpu.set_register8(reg!(D), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdEFromMemHL => {
-                Ok(cpu.set_register8(reg!(E), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdHFromMemHL => {
-                Ok(cpu.set_register8(reg!(H), cpu.read(cpu.get_register16(reg!(HL)))))
-            }
-            Opcode::LdLFromMemHL => {
-                Ok(cpu.set_register8(reg!(L), cpu.read(cpu.get_register16(reg!(HL)))))
+            Opcode::LdR8FromMemHL(reg) => {
+                Ok(cpu.set_register8(reg, cpu.read(cpu.get_register16(reg!(HL)))))
             }
 
             // Ld A from Address

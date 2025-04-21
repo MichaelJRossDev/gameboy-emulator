@@ -35,13 +35,8 @@ pub enum Opcode {
     LdMemHLH,
     LdMemHLL,
     LdMemHLA,
-    LdBFromMemHL,
-    LdCFromMemHL,
-    LdDFromMemHL,
-    LdEFromMemHL,
-    LdHFromMemHL,
-    LdLFromMemHL,
-    LdAFromMemHL,
+
+    LdR8FromMemHL(Register8),
 
     LdAFromAddr,
     LdAddrA,
@@ -153,13 +148,13 @@ impl TryFrom<u8> for Opcode {
             0x3B => Ok(Opcode::DecR16(reg!(SP))),
 
             // Ld r8 MemHL
-            0x46 => Ok(Opcode::LdBFromMemHL),
-            0x4E => Ok(Opcode::LdCFromMemHL),
-            0x56 => Ok(Opcode::LdDFromMemHL),
-            0x5E => Ok(Opcode::LdEFromMemHL),
-            0x66 => Ok(Opcode::LdHFromMemHL),
-            0x6E => Ok(Opcode::LdLFromMemHL),
-            0x7E => Ok(Opcode::LdAFromMemHL),
+            0x46 => Ok(Opcode::LdR8FromMemHL(reg!(B))),
+            0x4E => Ok(Opcode::LdR8FromMemHL(reg!(C))),
+            0x56 => Ok(Opcode::LdR8FromMemHL(reg!(D))),
+            0x5E => Ok(Opcode::LdR8FromMemHL(reg!(E))),
+            0x66 => Ok(Opcode::LdR8FromMemHL(reg!(H))),
+            0x6E => Ok(Opcode::LdR8FromMemHL(reg!(L))),
+            0x7E => Ok(Opcode::LdR8FromMemHL(reg!(A))),
 
             // Write r8 to MemHL
             // 0x70 => Ok(Opcode::LdMemHLB),

@@ -5,4 +5,5 @@ mod jump;
 mod accumulator_address;
 mod inc_dec_r8;
 mod inc_dec_r16;
+mod ld_r8_memhl;
 mod opcode_coverage;

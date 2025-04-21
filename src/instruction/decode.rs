@@ -43,6 +43,11 @@ impl Instruction {
                 operand: Operand::Address(cpu.fetch_word()),
             }),
 
+            Opcode::LdR8FromMemHL(reg) => Ok(Self {
+                opcode,
+                operand: Operand::None,
+            }),
+
             _ => Err(InstructionDecodeError::NotImplemented),
         }
     }
