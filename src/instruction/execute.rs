@@ -5,12 +5,6 @@ use crate::{
 };
 use thiserror::Error;
 
-macro_rules! ld_r8_r8 {
-    ($cpu:ident, $set:ident, $get:ident) => {
-        $cpu.set_register8(Register8::$set, $cpu.get_register8(Register8::$get))
-    };
-}
-
 impl Instruction {
     pub fn execute(&self, cpu: &mut Cpu) -> Result<(), InstructionExecuteError> {
         let operand = &self.operand;
