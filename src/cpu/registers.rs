@@ -88,7 +88,7 @@ impl Cpu {
     pub fn set_register8(&mut self, reg: Register8, value: u8) {
         match reg {
             Register8::A => self.a = value,
-            Register8::F => self.f = value,
+            Register8::F => self.f = value & 0b11110000,
             Register8::B => self.b = value,
             Register8::C => self.c = value,
             Register8::D => self.d = value,
