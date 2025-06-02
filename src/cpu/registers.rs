@@ -159,8 +159,10 @@ impl Cpu {
         }
     }
 
-    pub fn add_r8(&mut self, reg: Register8, value: u8) {
+    pub fn add_r8(&mut self, reg: Register8, value: u8) -> u8 {
         self.set_register8(reg, self.get_register8(reg).wrapping_add(value));
+
+        self.get_register8(reg)
     }
 
     pub fn sub_r8(&mut self, reg: Register8, value: u8) {

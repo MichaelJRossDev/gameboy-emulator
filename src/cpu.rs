@@ -1,6 +1,8 @@
 #[macro_use]
 pub mod registers;
 
+pub mod flags;
+
 #[cfg(test)]
 pub mod snapshot;
 

@@ -2,6 +2,7 @@ pub mod opcode;
 pub mod operand;
 pub mod execute;
 pub mod decode;
+mod flag_adjustment;
 
 pub use opcode::{Opcode, OpcodeDecodeError};
 pub use decode::InstructionDecodeError;

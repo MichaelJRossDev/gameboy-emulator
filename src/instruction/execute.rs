@@ -1,4 +1,7 @@
-use super::{Instruction, Opcode, Operand};
+use super::{
+    Instruction, Opcode, Operand,
+    flag_adjustment::{self, FlagAdjustment},
+};
 use crate::{
     cpu::{
         Cpu,
@@ -97,7 +100,18 @@ impl Instruction {
     }
 
     fn inc_r8(&self, cpu: &mut Cpu, reg: Register8) -> Result<(), InstructionExecuteError> {
-        cpu.add_r8(reg, 1);
+        let before = cpu.get_register8(reg);
+        let result = cpu.add_r8(reg, 1);
+
+        let flag_adjustment = FlagAdjustment {
+            zero: Some(result == 0),
+            subtract: Some(false),
+            half_carry: Some(before & 0b1111 == 0b1111),
+            carry: Some(result == 0),
+        };
+
+        flag_adjustment.apply(cpu);
+
         Ok(())
     }
 
